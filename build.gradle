@@ -39,7 +39,7 @@ build << {
 task myFrontEndBuildTask(type: Exec) {
 	println 'build FrontEnd REACT'
 
-	workingDir "$projectDir/src/main/front_end"
+	workingDir "$projectDir/src/main/web_app"
 
 	commandLine "npm", "install"
 
@@ -51,9 +51,9 @@ task copyFilesTask(type: Copy) {
 
 	dependsOn myFrontEndBuildTask
 
-	description = 'Copy files front-end build'
+	description = 'Copy files web_app build'
 
-	from "$projectDir/src/main/front_end/build"
+	from "$projectDir/src/main/web_app/build"
 	into "$projectDir/src/main/resources/public"
 }
 
@@ -62,7 +62,7 @@ build.dependsOn copyFilesTask
 
 task runDevFront(type: Exec){
 
-	workingDir "$projectDir/src/main/front_end"
+	workingDir "$projectDir/src/main/web_app"
 
 	commandLine "npm", "install"
 
