@@ -8,6 +8,7 @@
 /.pnp
 /.idea
 /out
+/.gradle
 
 .pnp.js
 

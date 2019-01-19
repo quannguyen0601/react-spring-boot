@@ -36,14 +36,19 @@ build << {
 	println 'build jar REACT SPRING BOOT'
 }
 
+task installDependency(type: Exec) {
+
+    workingDir "$projectDir/src/main/web_app"
+    commandLine "npm", "install"
+}
+
 task myFrontEndBuildTask(type: Exec) {
+    dependsOn installDependency
 	println 'build FrontEnd REACT'
 
-	workingDir "$projectDir/src/main/web_app"
+    workingDir "$projectDir/src/main/web_app"
+    commandLine "npm", "run", "build"
 
-	commandLine "npm", "install"
-
-	commandLine "npm", "run", "build"
 }
 
 task copyFilesTask(type: Copy) {
@@ -62,9 +67,9 @@ build.dependsOn copyFilesTask
 
 task runDevFront(type: Exec){
 
-	workingDir "$projectDir/src/main/web_app"
+    dependsOn installDependency
 
-	commandLine "npm", "install"
+	workingDir "$projectDir/src/main/web_app"
 
 	commandLine "npm", "run", "start"
 }
